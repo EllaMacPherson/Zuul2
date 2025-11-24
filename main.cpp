@@ -29,13 +29,7 @@ int main(){
   //trail head 1 + 2
 
   //create items
-  //pavilion->addItem("Jared");
-  Item jared   = {"Jared"};
-  Item Bob  = {"Bob"};
-  Item Lenny     = {"Lenny"};
-  Item skull = {"Bat skull"};
-  Item gold    = {"Gold"};
-  
+  portapotties->addItem("Jared");
 
   bool go = true;
   char m[10] = "MOVE";

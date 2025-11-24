@@ -14,6 +14,17 @@ Room::Room(const char* inDescription){
 
 void Room::print(){
   cout<<description<<endl;
+  cout<<"Items available: ";
+  vector<Room::Item*> currentItems = getItems();
+  if(currentItems.size() == 0){
+    cout<<"No items here ";
+  }else{
+    for(int i = 0; i < currentItems.size(); i++){
+      cout<< currentItems[i]->itemDescription;
+    }  
+  }
+  
+  cout<<endl;
   cout<<"Exits: "<<endl;
   for(map<const char*, Room*>::iterator it = exitMap.begin(); it != exitMap.end(); ++it){
     cout<<it->first<<endl;
@@ -26,8 +37,9 @@ void Room::setExit(const char* direction, Room* exitRoom){
 }
 
 void Room::addItem(const char* inItemDescription){
-  //  strcpy(itemDescription, inItemDescription);
-  itemsInRoom.push_back(inItemDescription);
+  Item* i;
+  i->itemDescription = inItemDescription;
+  itemsInRoom.push_back(i);
 }
 
 vector<Room::Item*> Room::getItems(){
