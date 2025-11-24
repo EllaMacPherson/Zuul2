@@ -11,7 +11,10 @@ void move(Room*& currentRoom);
 int main(){
   Room* current;
 
-
+  //OKAY CAN CREATE ROOMS AND CAN ADD EXITS AND CAN ADD ITEMS
+  //NEED TO DO: PIKC UP AND DROP OBJECTS AND CHECK INVENTROY
+  // + PROGRAM WIN CONDITIONS
+  //AND OF COURSE FIGURE OUT HOW TO PUSH THIS WITHOUT LOSING HISTORY BROO
   
   //create rooms
   Room* pavilion = new Room("You're standing in the middle of a large wooden pavilion. Towering evergreens loom all around you. There is a faint whiff of human waste coming from the south");
