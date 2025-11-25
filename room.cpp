@@ -42,6 +42,16 @@ void Room::addItem(const char* inItemDescription){
   itemsInRoom.push_back(i);
 }
 
+void Room::deleteItem(const char* DitemDescription){
+  vector<Room::Item*> currentItems = getItems();
+  
+  for(int i = 0; i < currentItems.size(); i++){
+    if(strcmp(currentItems[i]->itemDescription, DitemDescription) == 0){
+      itemsInRoom.erase(itemsInRoom.begin() + i);
+    }
+  }
+}
+
 vector<Room::Item*> Room::getItems(){
   return itemsInRoom;
 }

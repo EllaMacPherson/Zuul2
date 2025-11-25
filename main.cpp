@@ -7,7 +7,8 @@
 using namespace std;
 
 void move(Room*& currentRoom);
-void pickUp(vector<Room::Item*> Inventory, Room* currentRoom);
+void pickUp(vector<Room::Item*>& Inventory, Room* currentRoom);
+void printInventory(vector<Room::Item*>& Inventory);
 
 int main(){
   Room* current;
@@ -68,7 +69,7 @@ int main(){
       //drop an item
     }
     else if (strcmp(command, i) == 0){
-      //view your inventory
+      printInventory(Inventory);
     }
     else if(strcmp(command, q) == 0){
       return 0;
@@ -106,7 +107,51 @@ void move(Room*& currentRoom){
   }
 }
 
-void pickUp(vector<Room::Item*> Inventory, Room* currentRoom){
-  cout<<"Which item would you like to pick up?"<<endl;
+void pickUp(vector<Room::Item*>& Inventory, Room* currentRoom){
+  char itemToPickUp[50];
+  bool exist = false;
+  vector<Room::Item*> itemsInCurrentRoom = currentRoom->getItems();
+
+  //if there's no items in the room
+  if(itemsInCurrentRoom.size() == 0){
+    cout<<"There are no items to be picked up in this room!"<<endl;
+    return;
+  }
+  
+  
+  cout<<"What item would you like to pick up?"<<endl;
+  cin.get(itemToPickUp, 50);
+  cin.ignore();
+  int i =0;
+  for(auto it = itemsInCurrentRoom.begin(); it != itemsInCurrentRoom.end(); ++it){
+    //input is in char[]
+    //item in room is in const char*
+    char e[50];
+    strcpy(e, (*it)->itemDescription);//dereference it.. cause its too many pointers or something
+    if(strcmp(e, itemToPickUp) == 0){
+      exist = true;
+      Inventory.push_back(currentRoom->getItems()[i]);
+      //delete from room
+      currentRoom->deleteItem((*it)->itemDescription);
+      //then add it to inventory
+    }
+    i++;
+  }
+  //search currentRooms item vector for the item typed in
+
+  if(exist == false){
+    cout<<"Item does not exist or is not currently in the room"<<endl;
+  }
+
 }
-//TEST COMMIT HERE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! BEFORE CONTUINUTING !!!!
+
+void printInventory(vector<Room::Item*>& Inventory){
+  cout<<"Inventory: " <<endl;
+  if(Inventory.size() == 0){
+    cout<<"Empty"<<endl;
+  }else{    
+    for(int i = 0; i < Inventory.size(); i++){
+      cout<<Inventory[i]->itemDescription<<" "<< endl;
+    }
+  }
+}

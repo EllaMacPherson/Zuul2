@@ -14,6 +14,7 @@ class Room{
   void setExit(const char*, Room*);
   //print when they enter such room
   void print();
+
   //map variable for each room, first var is direction of exit , second var is WHERE that exit goes too
   map<const char*, Room*> exitMap;
   
@@ -22,8 +23,9 @@ class Room{
   };
 
   vector<Item*> itemsInRoom;
-  void addItem(const char*); 
-  vector<Item*>& getItems();
+  void addItem(const char*);
+  void deleteItem(const char*);
+  vector<Item*> getItems();
   
 
  protected:
