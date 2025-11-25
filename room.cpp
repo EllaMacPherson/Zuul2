@@ -37,8 +37,13 @@ void Room::setExit(const char* direction, Room* exitRoom){
 }
 
 void Room::addItem(const char* inItemDescription){
-  Item* i;
-  i->itemDescription = inItemDescription;
+  Item* i = new Item();
+  
+  //copy string NOT just the const char* pointer
+  char* cstring = new char[strlen(inItemDescription)+1]; //+1 for nulll?
+  strcpy(cstring, inItemDescription);
+  
+  i->itemDescription = cstring;
   itemsInRoom.push_back(i);
 }
 

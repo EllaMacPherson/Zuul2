@@ -9,13 +9,10 @@ using namespace std;
 void move(Room*& currentRoom);
 void pickUp(vector<Room::Item*>& Inventory, Room* currentRoom);
 void printInventory(vector<Room::Item*>& Inventory);
+void drop(vector<Room::Item*>& Inventory, Room* currentRoom);
 
 int main(){
   Room* current;
-
-  //NEED TO DO: PIKC UP AND DROP OBJECTS AND CHECK INVENTROY
-  // + PROGRAM WIN CONDITIONS
-  //AND OF COURSE FIGURE OUT HOW TO PUSH THIS WITHOUT LOSING HISTORY BROO
   
   //create rooms
   Room* pavilion = new Room("You're standing in the middle of a large wooden pavilion. Towering evergreens loom all around you. There is a faint whiff of human waste coming from the south");
@@ -66,7 +63,7 @@ int main(){
       pickUp(Inventory, current);
     }
     else if(strcmp(command, d) ==0){
-      //drop an item
+      drop(Inventory, current);
     }
     else if (strcmp(command, i) == 0){
       printInventory(Inventory);
@@ -143,6 +140,39 @@ void pickUp(vector<Room::Item*>& Inventory, Room* currentRoom){
     cout<<"Item does not exist or is not currently in the room"<<endl;
   }
 
+}
+
+//CAUSING SEGMENTATION FAULT!!
+void drop(vector<Room::Item*>& Inventory, Room* currentRoom){
+  char itemToBeDropped[50];
+  bool exist = false;
+  
+  if(Inventory.size() == 0){
+    cout<<"Your inventory is empty, there are no items that could be dropped"<<endl;
+    return;
+  }
+  
+  cout<<"What item do you want to drop? (Must be in your inventory)"<<endl;
+  cin.get(itemToBeDropped, 50);
+  cin.ignore();
+  
+  for(int i = 0; i < Inventory.size(); i++){
+    if(strcmp(Inventory[i]->itemDescription, itemToBeDropped) == 0){
+      exist = true;
+      //add item to room
+      currentRoom->addItem(Inventory[i]->itemDescription);
+      //breaks HERE ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      Inventory.erase(Inventory.begin()+i);
+      //delete item from inventory
+      //    delete Inventory[i];
+      
+      
+      }
+  }
+
+  if(exist == false){
+    cout<<"That item name is not in your inventory, use command INVENTORY to verify"<<endl;
+  }
 }
 
 void printInventory(vector<Room::Item*>& Inventory){
