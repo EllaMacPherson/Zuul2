@@ -7,11 +7,11 @@
 using namespace std;
 
 void move(Room*& currentRoom);
+void pickUp(vector<Room::Item*> Inventory, Room* currentRoom);
 
 int main(){
   Room* current;
 
-  //OKAY CAN CREATE ROOMS AND CAN ADD EXITS AND CAN ADD ITEMS
   //NEED TO DO: PIKC UP AND DROP OBJECTS AND CHECK INVENTROY
   // + PROGRAM WIN CONDITIONS
   //AND OF COURSE FIGURE OUT HOW TO PUSH THIS WITHOUT LOSING HISTORY BROO
@@ -30,6 +30,8 @@ int main(){
   portapotties->setExit("NORTH", pavilion);
 
   //trail head 1 + 2
+  trailhead1->setExit("SOUTH", pavilion);
+  trailhead2->setExit("WEST", pavilion);
 
   //create items
   portapotties->addItem("Jared");
@@ -60,7 +62,7 @@ int main(){
       
     }
     else if (strcmp(command, p) == 0){
-      //pick up an item
+      pickUp(Inventory, current);
     }
     else if(strcmp(command, d) ==0){
       //drop an item
@@ -103,3 +105,8 @@ void move(Room*& currentRoom){
     cout<<"Exit does not exist"<<endl;
   }
 }
+
+void pickUp(vector<Room::Item*> Inventory, Room* currentRoom){
+  cout<<"Which item would you like to pick up?"<<endl;
+}
+//TEST COMMIT HERE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! BEFORE CONTUINUTING !!!!

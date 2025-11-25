@@ -23,7 +23,7 @@ class Room{
 
   vector<Item*> itemsInRoom;
   void addItem(const char*); 
-  vector<Item*> getItems();
+  vector<Item*>& getItems();
   
 
  protected:
