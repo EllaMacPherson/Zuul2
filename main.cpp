@@ -20,6 +20,19 @@ int main(){
   Room* portapotties = new Room("You approach a stinkly circle of porta potties. Whens the last time somebody cleaned this place? Look there's one of your kids playing with the toilet paper roll!");
   Room* trailhead1 = new Room("You stumble upon a sign labeled Trail Head 1, there is a looming hill to your north, a river rushing to your east, and a cave on the west.");
   Room* trailhead2 = new Room("You stumble upon a sign labeled Trail Head 2 you hear the distant hum of RV generators");
+  Room* rvcampground = new Room("You walk into a cleared out dirt patch in the forest. There are three RVs set up. You head childish laughter coming from one");
+  Room* RV1 = new Room("You investigate an RV labeled RV 1. There's one of your kids! He's sitting with the RV owners eating a smore");
+  Room* RV2 = new Room("You look around an RV labeled RV 2, hmmm.. No one here");
+  Room* RV3 = new Room("You knock on the door of an RV labeled RV 3, an old man opens it. Says he saw a kid at one of the other RVs, he offers you a choclate bar!");
+  Room* cave = new Room("You step into the cold dark cave, you hear the screeches of bats to your west. Mine cart tracks go off to the south");
+  Room* cavern = new Room("You walk into a massive cavern with water rushing through the middle. A bat swoops down from overhead. You look at your feet. Is that a skull?");
+  Room* goldMine = new Room("You step into an abandoned gold mine! oooh is that a lump of gold?");
+  Room* stream = new Room("You walk up to a rushing stream, theres a fishing rock up north");
+  Room* fishingRock = new Room("You step up onto the rock, nothing here but a discarded fishing rod");
+  Room* hill = new Room("You walk to the base of a hill, looks like there's an view point further up north");
+  Room* outlook = new Room("You climb all the way up the hill and reach an outlook in the trees, wow what a stunning view. There's an old campfire to the east, an old campsite to your west");
+  Room* oldcampsite = new Room("You walk into an old campsite, cans scattered. Is that one of my kids?!");
+  Room* oldfirepit = new Room("You are at the old fire pit, nothing here but charcols");
     
   //create exits
   pavilion->setExit("SOUTH", portapotties);
@@ -28,14 +41,55 @@ int main(){
   
   portapotties->setExit("NORTH", pavilion);
 
-  //trail head 1 + 2
-  trailhead1->setExit("SOUTH", pavilion);
+  trailhead2->setExit("SOUTH", rvcampground);
   trailhead2->setExit("WEST", pavilion);
+
+  trailhead1->setExit("SOUTH", pavilion);
+  trailhead1->setExit("WEST", cave);
+  trailhead1->setExit("EAST", stream);
+  trailhead1->setExit("NORTH", hill);
+
+  rvcampground->setExit("NORTH", trailhead2);
+  rvcampground->setExit("EAST", RV2);
+  rvcampground->setExit("SOUTH", RV1);
+  rvcampground->setExit("WEST",RV3);
+
+  RV2->setExit("WEST", rvcampground);
+  RV1->setExit("NORTH", rvcampground);
+  RV3->setExit("EAST", rvcampground);
+
+  hill->setExit("SOUTH", trailhead1);
+  hill->setExit("NORTH", outlook);
+
+  outlook->setExit("SOUTH",hill);
+  outlook->setExit("EAST", oldfirepit);
+  outlook->setExit("WEST", oldcampsite);
+
+  oldfirepit->setExit("WEST", outlook);
+  oldcampsite->setExit("EAST", outlook);
+
+  stream->setExit("WEST", trailhead1);
+  stream->setExit("NORTH", fishingRock);
+
+  fishingRock->setExit("SOUTH", stream);
+
+  cave->setExit("SOUTH", goldMine);
+  cave->setExit("WEST", cavern);
+  cave->setExit("EAST", trailhead1);
+
+  goldMine->setExit("NORTH", cave);
+
+  cavern->setExit("EAST", cave);
 
   //create items
   portapotties->addItem("Jared");
-  portapotties->addItem("Gertrude");
-  portapotties->addItem("Bartholomew");
+  RV1->addItem("Gertrude");
+  oldcampsite->addItem("Bartholomew");
+  RV3->addItem("Choclate Bar");
+  cavern->addItem("Bat Skull");
+  goldMine->addItem("Gold");
+  fishingRock->addItem("FishingRod");
+  
   char m[10] = "MOVE";
   char p[10] = "PICK UP";
   char d[10] = "DROP";
