@@ -10,6 +10,7 @@ void move(Room*& currentRoom);
 void pickUp(vector<Room::Item*>& Inventory, Room* currentRoom);
 void printInventory(vector<Room::Item*>& Inventory);
 void drop(vector<Room::Item*>& Inventory, Room* currentRoom);
+bool checkWin(vector<Room::Item*>& Inventory);
 
 int main(){
   Room* current;
@@ -33,8 +34,8 @@ int main(){
 
   //create items
   portapotties->addItem("Jared");
-
-  bool go = true;
+  portapotties->addItem("Gertrude");
+  portapotties->addItem("Bartholomew");
   char m[10] = "MOVE";
   char p[10] = "PICK UP";
   char d[10] = "DROP";
@@ -49,7 +50,7 @@ int main(){
   cout<<endl;
   
   //play the game
-  while(go == true){
+  while(checkWin(Inventory) == false){
     command[0] = '\0';
     cout<<"Choose your next action (MOVE, PICK UP, DROP, INVENTORY or QUIT): "<<endl;
     cin.get(command, 20);
@@ -76,6 +77,7 @@ int main(){
       cout<<"PLEASE ENTER A VALID COMMAND" <<endl;
     }
   }
+  cout<<endl<<"Congrats on finding all your kids! Thank you for playing!"<<endl;
 }
 
 void move(Room*& currentRoom){
@@ -184,4 +186,20 @@ void printInventory(vector<Room::Item*>& Inventory){
       cout<<Inventory[i]->itemDescription<<" "<< endl;
     }
   }
+}
+
+bool checkWin(vector<Room::Item*>& Inventory){
+  int kidsFound = 0;
+  if(Inventory.size() == 0){
+    return false;
+  }
+  for(int i =0; i< Inventory.size(); i++){
+    if(strcmp(Inventory[i]->itemDescription, "Jared") == 0 || strcmp(Inventory[i]->itemDescription, "Gertrude") == 0||strcmp(Inventory[i]->itemDescription, "Bartholomew") == 0){
+      kidsFound++;
+    }
+  }
+  if(kidsFound == 3){
+    return true;
+  }
+  return false;
 }
