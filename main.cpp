@@ -278,10 +278,11 @@ void printInventory(vector<Room::Item*>& Inventory){
   }
   else{    //print each item descption out
     for(int i = 0; i < Inventory.size(); i++){
-      cout<<Inventory[i]->itemDescription<< endl;
+      cout<<Inventory[i]->itemDescription;
       cout<<", ";
     }
   }
+  cout<<endl;
 }
 
 //check the win
